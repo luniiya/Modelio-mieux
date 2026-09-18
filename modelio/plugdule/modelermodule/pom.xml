@@ -2,7 +2,7 @@
     <!--Modelio Studio: This part of the file is generated and automatically updated, do not modify.-->
     <groupId>org.modelio</groupId>
     <artifactId>org.modelio.modelermodule</artifactId>
-    <version>9.6.02-SNAPSHOT</version>
+    <version>9.6.03-SNAPSHOT</version>
     <packaging>eclipse-plugin</packaging>
     <description>Standard Modelio UML Modeler extensions.</description>
 

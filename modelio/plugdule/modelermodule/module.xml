@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><Module author="modelio" binaryversion="6.1.2" class="org.modelio.module.modelermodule.impl.ModelerModuleModule" id="ModelerModule" image="" schema-level="2" uid="00000000-0000-2710-0000-000000000000" url="" version="9.6.02">
+<?xml version="1.0" encoding="UTF-8"?><Module author="modelio" binaryversion="6.1.2" class="org.modelio.module.modelermodule.impl.ModelerModuleModule" id="ModelerModule" image="" schema-level="2" uid="00000000-0000-2710-0000-000000000000" url="" version="9.6.03">
     <ClassPath/>
     <Profiles>
         <Profile id="Code" uid="00300000-0000-0032-0000-000000000000">
@@ -264,6 +264,14 @@
             </Stereotype>
             <Stereotype is-abstract="false" is-hidden="false" label="%stereotype.type.label" metaclass="Standard.Class" name="type" owner-stereotype="" uid="00700680-0000-01ba-0000-000000000000">
                 <Icon path=""/>
+                <Image path=""/>
+            </Stereotype>
+            <Stereotype is-abstract="false" is-hidden="false" label="%stereotype.active.label" metaclass="Standard.Class" name="active" owner-stereotype="" uid="bb4a823d-c1dd-4c13-b41e-3b9d3051b08f">
+                <Icon path="res/icon/active_class.png"/>
+                <Image path=""/>
+            </Stereotype>
+            <Stereotype is-abstract="false" is-hidden="false" label="%stereotype.passive.label" metaclass="Standard.Class" name="passive" owner-stereotype="" uid="6f98852f-606d-413d-8453-fdb3be27dab8">
+                <Icon path="res/icon/passive_class.png"/>
                 <Image path=""/>
             </Stereotype>
             <Stereotype is-abstract="false" is-hidden="false" label="%stereotype.utility.label" metaclass="Standard.Classifier" name="utility" owner-stereotype="" uid="00700680-0000-01bf-0000-000000000000">
