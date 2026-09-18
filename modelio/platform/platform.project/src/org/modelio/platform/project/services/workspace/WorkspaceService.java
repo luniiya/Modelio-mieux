@@ -51,6 +51,12 @@ public class WorkspaceService implements IWorkspaceService {
     @objid ("003dc516-7baa-10b3-9941-001ec947cd2a")
     private static final String LAST_USED_WORKSPACE_PREFERENCE_KEY = "workspace.last";
 
+    /**
+     * Keep Modelio projects beside the Eclipse-mieux workspace so both tools
+     * see the same project directories by default.
+     */
+    private static final String DEFAULT_WORKSPACE_PATH = "eclipse-mieux/workspace";
+
     @objid ("d7b2fd41-113a-4169-ad9e-c567da9eb3a5")
     private IProjectServiceAccess projectServiceAccess;
 
@@ -177,7 +183,7 @@ public class WorkspaceService implements IWorkspaceService {
      * Get the workspace to use:
      * <ol>
      * <li>use the last used workspace as saved in the preferences</li>
-     * <li>default to user's home directory otherwise</li>
+     * <li>default to the shared Eclipse-mieux workspace otherwise</li>
      * </ol>
      *
      * @return the workspace path
@@ -195,7 +201,7 @@ public class WorkspaceService implements IWorkspaceService {
         }
         // Preferences could not provide a valid workspace, default to user's
         // home
-        final Path defaultPath = Paths.get(System.getProperty("user.home"), "modelio", "workspace");
+        final Path defaultPath = Paths.get(System.getProperty("user.home"), ".local", "share", WorkspaceService.DEFAULT_WORKSPACE_PATH);
         if (!Files.exists(defaultPath, LinkOption.NOFOLLOW_LINKS)) {
             new File(defaultPath.toString()).mkdirs(); // create if the
             // default workspace

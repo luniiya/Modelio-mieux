@@ -37,4 +37,8 @@ echo "==> ECLIPSE_WS=${ECLIPSE_WS}"
 echo "==> MAVEN_OPTS=${MAVEN_OPTS}"
 echo "==> mvn ${MVN_ARGS[*]} ${EXTRA_ARGS[*]:-}"
 
-exec mvn "${MVN_ARGS[@]}" "${EXTRA_ARGS[@]}"
+mvn "${MVN_ARGS[@]}" "${EXTRA_ARGS[@]}"
+
+if [[ "${WITH_TESTS}" -eq 1 ]]; then
+    "${SCRIPT_DIR}/test-mcp.sh"
+fi

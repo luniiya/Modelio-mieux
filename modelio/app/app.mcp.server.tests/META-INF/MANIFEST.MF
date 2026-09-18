@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MCP Server Tests
+Bundle-SymbolicName: org.modelio.app.mcp.server.tests
+Bundle-Version: 6.2.0.qualifier
+Bundle-Vendor: modelio.org
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Require-Bundle: org.modelio.app.mcp.server,
+ com.fasterxml.jackson.core.jackson-core,
+ com.fasterxml.jackson.core.jackson-databind,
+ com.fasterxml.jackson.core.jackson-annotations,
+ junit
+Bundle-ActivationPolicy: lazy

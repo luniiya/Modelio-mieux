@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><Module author="modelio" binaryversion="6.1.2" class="org.modelio.module.modelermodule.impl.ModelerModuleModule" id="ModelerModule" image="" schema-level="2" uid="00000000-0000-2710-0000-000000000000" url="" version="9.6.01">
+<?xml version="1.0" encoding="UTF-8"?><Module author="modelio" binaryversion="6.1.2" class="org.modelio.module.modelermodule.impl.ModelerModuleModule" id="ModelerModule" image="" schema-level="2" uid="00000000-0000-2710-0000-000000000000" url="" version="9.6.02">
     <ClassPath/>
     <Profiles>
         <Profile id="Code" uid="00300000-0000-0032-0000-000000000000">
@@ -66,6 +66,10 @@
                 </TagTypes>
             </Stereotype>
             <Stereotype is-abstract="false" is-hidden="false" label="%stereotype.access.label" metaclass="Standard.ElementImport" name="access" owner-stereotype="" uid="00700680-0000-01cc-0000-000000000000">
+                <Icon path=""/>
+                <Image path=""/>
+            </Stereotype>
+            <Stereotype is-abstract="false" is-hidden="false" label="%stereotype.active.label" metaclass="Standard.Actor" name="active" owner-stereotype="" uid="01ec1ac4-0000-2f20-0000-000000000000">
                 <Icon path=""/>
                 <Image path=""/>
             </Stereotype>
@@ -217,6 +221,10 @@
             <Stereotype is-abstract="false" is-hidden="false" label="%stereotype.secondary.label" metaclass="Standard.Actor" name="secondary" owner-stereotype="" uid="01ec1ac4-0000-2f04-0000-000000000000">
                 <Icon path="res/icon/secondary.png"/>
                 <Image path="res/images/bigsecondary48x48.png"/>
+            </Stereotype>
+            <Stereotype is-abstract="false" is-hidden="false" label="%stereotype.passive.label" metaclass="Standard.Actor" name="passive" owner-stereotype="" uid="01ec1ac4-0000-2f21-0000-000000000000">
+                <Icon path=""/>
+                <Image path=""/>
             </Stereotype>
             <Stereotype is-abstract="false" is-hidden="false" label="%stereotype.stub.label" metaclass="Standard.Package" name="stub" owner-stereotype="" uid="00700680-0000-01d7-0000-000000000000">
                 <Icon path=""/>

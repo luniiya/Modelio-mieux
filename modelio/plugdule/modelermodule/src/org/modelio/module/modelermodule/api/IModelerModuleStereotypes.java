@@ -20,6 +20,9 @@ import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 @objid ("9197442a-f821-4086-8b9f-f6492f55c6d5")
 public interface IModelerModuleStereotypes {
+    @objid ("e90c13a2-8a8f-4f6d-9a70-14bd1487d5b1")
+    public static final String ACTIVE = "active";
+
     @objid ("b58bf334-6706-4e35-b5ad-708372a0c771")
     public static final String ACCESS = "access";
 
@@ -205,6 +208,9 @@ public interface IModelerModuleStereotypes {
 
     @objid ("4ecc9d81-9297-4485-aff7-2c30163d985c")
     public static final String PART = "part";
+
+    @objid ("4f9d7e0a-1a20-4f5a-8c3c-6882afc365a8")
+    public static final String PASSIVE = "passive";
 
     @objid ("721f991c-6202-4cf2-97bf-a4b8c8edd88c")
     public static final String POSTCONDITION = "postcondition";

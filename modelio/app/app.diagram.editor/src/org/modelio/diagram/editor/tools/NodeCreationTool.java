@@ -27,6 +27,7 @@ import org.eclipse.gef.tools.CreationTool;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.modelio.diagram.elements.core.requests.RequestTypes;
+import org.modelio.diagram.elements.drawings.text.GmTextDrawing;
 
 /**
  * Modelio node creation tool .
@@ -48,6 +49,11 @@ public class NodeCreationTool extends CreationTool {
         super.enforceConstraintsForSizeOnDropCreate(request);
 
         final Dimension reqSize = request.getSize();
+        if (GmTextDrawing.class.isAssignableFrom((Class<?>) request.getNewObjectType())) {
+            // A click (or a very short drag) otherwise creates an almost unusable text box.
+            reqSize.width = Math.max(reqSize.width, 160);
+            reqSize.height = Math.max(reqSize.height, 80);
+        }
         if (getCurrentInput().isModKeyDown(SWT.SHIFT)) {
             // Enforce square / circle
             int size = Math.max(reqSize.height, reqSize.width);

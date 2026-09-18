@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Builds (unless --no-build) and installs Modelio into ~/.local/opt,
-# then symlinks the launcher into ~/.local/bin so `modelio` is on PATH.
+# then symlinks the launcher into ~/.local/bin so `modelio-mieux` is on PATH.
 #
 # This is the "rebuild and reinstall" entry point: just re-run this
 # script any time the source changes.
@@ -25,7 +25,9 @@ if [[ "${DO_BUILD}" -eq 1 ]]; then
 fi
 
 INSTALL_DIR="${HOME}/.local/opt/modelio"
-BIN_LINK="${HOME}/.local/bin/modelio"
+BIN_LINK="${HOME}/.local/bin/modelio-mieux"
+LEGACY_BIN_LINK="${HOME}/.local/bin/modelio"
+MODELIO_WORKSPACE="${MODELIO_WORKSPACE:-${HOME}/.local/share/eclipse-mieux/workspace}"
 
 # Find the materialized product's launcher binary rather than assuming
 # the exact os/ws/arch directory layout tycho-p2-director produces.
@@ -45,8 +47,12 @@ rm -rf "${INSTALL_DIR}"
 mkdir -p "$(dirname "${INSTALL_DIR}")"
 cp -a "${SRC_DIR}" "${INSTALL_DIR}"
 
+mkdir -p "${MODELIO_WORKSPACE}"
+
 mkdir -p "$(dirname "${BIN_LINK}")"
-ln -sf "${INSTALL_DIR}/modelio" "${BIN_LINK}"
+ln -sf "${INSTALL_DIR}/modelio.sh" "${BIN_LINK}"
+# Keep old terminal commands and saved launchers working.
+ln -sf "${BIN_LINK}" "${LEGACY_BIN_LINK}"
 
 DESKTOP_DIR="${HOME}/.local/share/applications"
 DESKTOP_FILE="${DESKTOP_DIR}/modelio-mieux.desktop"
@@ -54,9 +60,9 @@ mkdir -p "${DESKTOP_DIR}"
 cat > "${DESKTOP_FILE}" <<EOF
 [Desktop Entry]
 Type=Application
-Name=Modelio
+Name=Modelio Mieux
 Comment=UML/BPMN/ArchiMate/SysML modeling tool (Modelio-mieux fork)
-Exec=${BIN_LINK}
+Exec=${BIN_LINK} -workspace ${MODELIO_WORKSPACE}
 Icon=${INSTALL_DIR}/icon.xpm
 Terminal=false
 StartupNotify=true
@@ -68,9 +74,9 @@ if command -v update-desktop-database >/dev/null 2>&1; then
 fi
 
 echo "==> Installed."
-echo "==> Run with: modelio"
+echo "==> Run with: modelio-mieux"
 echo "==> App launcher entry: ${DESKTOP_FILE}"
-if ! command -v modelio >/dev/null 2>&1; then
+if ! command -v modelio-mieux >/dev/null 2>&1; then
     echo "    Note: ${HOME}/.local/bin isn't on PATH in this shell session."
     echo "    Open a new terminal, or add it to your shell rc."
 fi

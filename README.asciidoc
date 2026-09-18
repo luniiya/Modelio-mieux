@@ -1,4 +1,9 @@
+:toc:
+:toclevels: 2
+
 link:https://www.modelio.org[image:README/logo-modelio-v4.png[]]
+
+link:https://github.com/ModelioOpenSource/Modelio/blob/master/LICENSE[image:https://img.shields.io/github/license/ModelioOpenSource/Modelio[License]] link:https://github.com/ModelioOpenSource/Modelio/releases/latest[image:https://img.shields.io/github/v/release/ModelioOpenSource/Modelio[Latest Release]] link:https://www.modelio.org[image:https://img.shields.io/badge/website-modelio.org-2F6FED[Website]]
 
 == Modelio 6.2 Release
 
@@ -67,18 +72,26 @@ To access example projects :
 
 === Projects
 
- * https://github.com/ModelioOpenSource/Modelio/blob/master/Sample%20Projects/%5BArchiMate%20Example%5D%20Discount%20Travel%20for%20ArchiMate.zip[*Archimate : Discount Travel for ArchiMate*]  
-The 'Discount Travel' project is an example of how to model the enterprise architecture of a travel agency to manage their reservation system. 
- 
- * https://github.com/ModelioOpenSource/Modelio/blob/master/Sample%20Projects/%5BJAVA%20Example%5D%20Java%20Browser.zip[*JavaDesigner : Java Browser*]
-A simple HTML browser, based on a swing JEditorPane component. 
- 
- * https://github.com/ModelioOpenSource/Modelio/blob/master/Sample%20Projects/%5BSysML%20Example%5D%20The%20plant.zip[*SysML : The plant*]
-In the Systems and Automation Department at Federal University of Santa Catarina (UFSC) there is an experimental unit of industrial automation that is used to demonstrate the operation of several control strategies using the same equipments and supervision tools.
+[cols="1,2,4", options="header"]
+|===
+| Framework | Project | Description
 
- * https://github.com/ModelioOpenSource/Modelio/blob/master/Sample%20Projects/%5BUML%20Example%5D%20Shopping%20Cart.zip[*UML : Shopping Cart*]
-This project contains the model for the Online Shopping Cart system, including all the models used to specify and realize the IT system.
-This model addresses the development of an online shopping cart system, that allows suppliers to sell their products directly online to customers. It is provided as a UML example covering the analysis of the business context and processes, and the design and deployment of a possible implementation.
+| Archimate
+| link:https://github.com/ModelioOpenSource/Modelio/blob/master/Sample%20Projects/%5BArchiMate%20Example%5D%20Discount%20Travel%20for%20ArchiMate.zip[*Discount Travel for ArchiMate*]
+| The 'Discount Travel' project is an example of how to model the enterprise architecture of a travel agency to manage their reservation system.
+
+| JavaDesigner
+| link:https://github.com/ModelioOpenSource/Modelio/blob/master/Sample%20Projects/%5BJAVA%20Example%5D%20Java%20Browser.zip[*Java Browser*]
+| A simple HTML browser, based on a swing JEditorPane component.
+
+| SysML
+| link:https://github.com/ModelioOpenSource/Modelio/blob/master/Sample%20Projects/%5BSysML%20Example%5D%20The%20plant.zip[*The plant*]
+| In the Systems and Automation Department at Federal University of Santa Catarina (UFSC) there is an experimental unit of industrial automation that is used to demonstrate the operation of several control strategies using the same equipments and supervision tools.
+
+| UML
+| link:https://github.com/ModelioOpenSource/Modelio/blob/master/Sample%20Projects/%5BUML%20Example%5D%20Shopping%20Cart.zip[*Shopping Cart*]
+| This project contains the model for the Online Shopping Cart system, including all the models used to specify and realize the IT system. This model addresses the development of an online shopping cart system, that allows suppliers to sell their products directly online to customers. It is provided as a UML example covering the analysis of the business context and processes, and the design and deployment of a possible implementation.
+|===
 
 
 == Build from Source
@@ -155,11 +168,10 @@ Modules, Audit, URLs
 .From the diagram view
 image::README/create-element-diagram.jpg[Element Creation]
 
-(Note: if you don't see the Modelio layout above, but wish to continue
-with this Quick Start, expand your project in the Model pane until you
-see a folder icon with the same name as your project, and select "Create
-diagram..." from the context menu, typically by right-clicking on that
-icon.)
+[NOTE]
+====
+If you don't see the Modelio layout above, but wish to continue with this Quick Start, expand your project in the Model pane until you see a folder icon with the same name as your project, and select "Create diagram..." from the context menu, typically by right-clicking on that icon.
+====
 
 Key:
 

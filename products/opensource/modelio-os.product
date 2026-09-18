@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Modelio" uid="org.modelio.product" id="org.modelio.app.ui.modelio" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="6.2.0.qualifier" type="features" includeLaunchers="true" autoIncludeRequirements="false">
+<product name="Modelio Mieux" uid="org.modelio.product" id="org.modelio.app.ui.modelio" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="6.2.0.qualifier" type="features" includeLaunchers="true" autoIncludeRequirements="false">
 
    <configIni use="default">
    </configIni>
@@ -94,7 +94,7 @@
       <plugin id="org.eclipse.equinox.p2.reconciler.dropins" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
       <property name="osgi.configuration.cascaded" value="true" />
-      <property name="osgi.locking" value="none" />
+      <property name="osgi.locking" value="java.io" />
       <property name="osgi.configuration.area" value="@user.home/.modelio/6.2/opensource-cache/conf" />
       <property name="osgi.instance.area" value="@user.home/.modelio/6.2/opensource-cache/data" />
       <property name="osgi.sharedConfiguration.area" value="file\:configuration/" />

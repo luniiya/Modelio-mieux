@@ -76,6 +76,8 @@ import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -705,6 +707,20 @@ public abstract class AbstractDiagramEditor implements IDiagramEditor {
                 getPalettePreferences());
 
         this.graphicalViewer = createGraphicalViewer(this.splitter);
+        this.graphicalViewer.getControl().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(final KeyEvent event) {
+                if ((event.stateMask & SWT.CTRL) != 0) {
+                    if (event.keyCode == 'c' || event.keyCode == 'C') {
+                        DiagramElementClipboard.copy(AbstractDiagramEditor.this.graphicalViewer);
+                        event.doit = false;
+                    } else if (event.keyCode == 'v' || event.keyCode == 'V') {
+                        DiagramElementClipboard.paste(AbstractDiagramEditor.this.graphicalViewer);
+                        event.doit = false;
+                    }
+                }
+            }
+        });
 
         this.splitter.setGraphicalControl(getGraphicalControl());
 

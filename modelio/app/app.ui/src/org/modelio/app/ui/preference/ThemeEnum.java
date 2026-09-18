@@ -27,7 +27,7 @@ public enum ThemeEnum {
     @objid ("e750da60-72f7-434a-a0f7-729b0b775c15")
     LIGHT(AppUi.I18N.getString("Preference.ThemeLabel.light"), "org.modelio.app.theme.light"),
     @objid ("4513ea07-674a-4785-a18a-31b307cae19f")
-    DARK(AppUi.I18N.getString("Preference.ThemeLabel.dark"), "org.modelio.app.theme.dark"),
+    DARK(AppUi.I18N.getString("Preference.ThemeLabel.dark"), "org.modelio.app.theme.obscure"),
     @objid ("96b90424-cd18-46d4-a697-352bc07ce156")
     SYSTEM(AppUi.I18N.getString("Preference.ThemeLabel.system"), "org.modelio.app.theme.system");
 

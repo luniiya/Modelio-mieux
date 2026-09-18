@@ -21,9 +21,13 @@ package org.modelio.app.ui.lifecycle;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.nio.channels.OverlappingFileLockException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.text.MessageFormat;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import jakarta.inject.Inject;
@@ -100,9 +104,15 @@ public class OsLifeCycleManager {
     @objid ("58c41593-e154-46bc-9dd4-e02ded767fef")
     private CommandLineData cmdLineData;
 
+    private FileChannel instanceLockChannel;
+
+    private FileLock instanceLock;
+
     @objid ("b46266aa-9b70-4eca-bc39-03ed33589e0f")
     @PostContextCreate
     void postContextCreate(final IEclipseContext context) {
+        acquireSingleInstanceLock();
+
         // Modelio start sequence is logged at INFO level
         LogLevel prevLevel = PluginLogger.ensureLogLevel(LogLevel.INFO);
         AppUi.LOG.info("Modelio by modelio.org");
@@ -180,6 +190,48 @@ public class OsLifeCycleManager {
             context.set(IProgressService.class, modelioProgressService);
         }
 
+    }
+
+    private void acquireSingleInstanceLock() {
+        final Path lockPath = Path.of(System.getProperty("user.home"), ".modelio", "6.2", "modelio.lock");
+        try {
+            Files.createDirectories(lockPath.getParent());
+            this.instanceLockChannel = FileChannel.open(lockPath,
+                    StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+            try {
+                this.instanceLock = this.instanceLockChannel.tryLock();
+            } catch (final OverlappingFileLockException e) {
+                this.instanceLock = null;
+            }
+            if (this.instanceLock == null) {
+                closeInstanceLock();
+                System.err.println("Modelio is already running. Close the existing instance before starting another one.");
+                throw new IllegalStateException("Another Modelio instance is already running");
+            }
+            Runtime.getRuntime().addShutdownHook(new Thread(this::closeInstanceLock, "modelio-instance-lock-release"));
+        } catch (final IOException e) {
+            throw new IllegalStateException("Cannot create the Modelio single-instance lock at " + lockPath, e);
+        }
+    }
+
+    private void closeInstanceLock() {
+        try {
+            if (this.instanceLock != null) {
+                this.instanceLock.release();
+                this.instanceLock = null;
+            }
+        } catch (final IOException e) {
+            // The process is already shutting down; the OS releases the lock.
+        } finally {
+            try {
+                if (this.instanceLockChannel != null) {
+                    this.instanceLockChannel.close();
+                    this.instanceLockChannel = null;
+                }
+            } catch (final IOException e) {
+                // The process is already shutting down; the channel will be closed by the OS.
+            }
+        }
     }
 
     /**

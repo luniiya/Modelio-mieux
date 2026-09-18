@@ -43,6 +43,8 @@
     <module>../../../../../modelio/app/app.editors.texteditors</module>
     <module>../../../../../modelio/app/app.link.editor</module>
     <module>../../../../../modelio/app/app.link.editor.ext_org</module>
+    <module>../../../../../modelio/app/app.mcp.server</module>
+    <module>../../../../../modelio/app/app.mcp.server.tests</module>
     <module>../../../../../modelio/app/app.model.browser.view</module>
     <module>../../../../../modelio/app/app.model.browser.view.ext_org</module>
     <module>../../../../../modelio/app/app.model.import.org</module>

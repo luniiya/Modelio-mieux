@@ -91,7 +91,7 @@ class ProjectAuthsChecker {
      */
     @objid ("5ef276f9-7d08-4baf-9c93-89a096fac7b3")
     public void checkAuthErrors(IProgressMonitor monitor, IGProject openedProject) {
-        if (this.authPrompter == null) {
+        if (this.authPrompter == null || openedProject.getType() == org.modelio.gproject.data.project.ProjectType.LOCAL) {
             return;
         }
 
@@ -175,13 +175,18 @@ class ProjectAuthsChecker {
      */
     @objid ("ad0a56c0-7178-456b-8463-3f8f3e50a6ab")
     public IAuthData checkMissingAuths(final GProjectDescriptor projectToOpen) {
-        String label = AppProjectCore.I18N.getMessage("OpenProjectHandler.Auth.ProjectLabel", projectToOpen.getName());
-        IAuthData firstProjAuth = this.projectAuth != null ? this.projectAuth : projectToOpen.getAuthDescriptor().getData();
+        if ("LOCAL".equals(projectToOpen.getType())) {
+            return new NoneAuthData();
+        }
 
-        IAuthData projAuthData = checkMissingPartAuth(
-                firstProjAuth,
-                label,
-                projectToOpen.getRemoteLocation());
+        String label = AppProjectCore.I18N.getMessage("OpenProjectHandler.Auth.ProjectLabel", projectToOpen.getName());
+        IAuthData projAuthData;
+        if (isLocalLocation(projectToOpen.getRemoteLocation())) {
+            projAuthData = new NoneAuthData();
+        } else {
+            IAuthData firstProjAuth = this.projectAuth != null ? this.projectAuth : projectToOpen.getAuthDescriptor().getData();
+            projAuthData = checkMissingPartAuth(firstProjAuth, label, projectToOpen.getRemoteLocation());
+        }
 
         AuthResolver authResolver = new AuthResolver(projAuthData);
         for (GProjectPartDescriptor f : projectToOpen.getPartDescriptors()) {
@@ -216,6 +221,10 @@ class ProjectAuthsChecker {
 
     @objid ("384b0ca0-9855-4902-bc4a-44b058677c75")
     private IAuthData checkMissingPartAuth(IAuthData authToCheck, String name, String location) {
+        if (isLocalLocation(location)) {
+            return new NoneAuthData();
+        }
+
         IAuthData authData = authToCheck;
 
         if (authData == null || !authData.isComplete()) {
@@ -228,6 +237,10 @@ class ProjectAuthsChecker {
             } while (authData != null && !authData.isComplete());
         }
         return authData;
+    }
+
+    private static boolean isLocalLocation(String location) {
+        return location == null || location.isEmpty() || location.startsWith("file:");
     }
 
     @objid ("8a5d51f9-24e8-4959-a478-d895a849e593")

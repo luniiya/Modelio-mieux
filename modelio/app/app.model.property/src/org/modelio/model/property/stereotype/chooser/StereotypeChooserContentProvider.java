@@ -70,6 +70,10 @@ public class StereotypeChooserContentProvider implements ITreeContentProvider {
                     ModuleComponent module = stereotype.getOwner().getOwnerModule();
                     if (module != null) {
                         ret.add(module);
+                    } else {
+                        // Keep usable stereotypes visible even when a legacy or
+                        // partially migrated module has lost its owner link.
+                        ret.add(stereotype);
                     }
                 }
             }
@@ -79,7 +83,8 @@ public class StereotypeChooserContentProvider implements ITreeContentProvider {
             List<Stereotype> stereotypes = this.modelService.findStereotypes(moduleComponent.getName(), ".*", this.element.getMClass());
             for (Stereotype stereotype : stereotypes) {
                 if ((!stereotype.isIsHidden()
-                  && (stereotype.getOwner().getOwnerModule().getUuid().equals(moduleComponent.getUuid())))) {
+                  && stereotype.getOwner().getOwnerModule() != null
+                  && stereotype.getOwner().getOwnerModule().getUuid().equals(moduleComponent.getUuid()))) {
                     ret.add(stereotype);
                 }
             }
@@ -108,9 +113,7 @@ public class StereotypeChooserContentProvider implements ITreeContentProvider {
             for (Stereotype stereotype : stereotypes) {
                 if (!stereotype.isIsHidden()) {
                     ModuleComponent module = stereotype.getOwner().getOwnerModule();
-                    if (module != null) {
-                        return true;
-                    }
+                    return true;
                 }
             }
         } else if (parent instanceof ModuleComponent) {
@@ -118,7 +121,8 @@ public class StereotypeChooserContentProvider implements ITreeContentProvider {
 
             List<Stereotype> stereotypes = this.modelService.findStereotypes(moduleComponent.getName(), ".*", this.element.getMClass());
             for (Stereotype stereotype : stereotypes) {
-                if (!stereotype.isIsHidden()) {
+                if (!stereotype.isIsHidden()
+                        && stereotype.getOwner().getOwnerModule() != null) {
                     return true;
                 }
             }

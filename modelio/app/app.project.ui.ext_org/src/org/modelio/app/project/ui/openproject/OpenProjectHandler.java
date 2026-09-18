@@ -52,6 +52,7 @@ import org.modelio.platform.model.ui.swt.SelectionHelper;
 import org.modelio.platform.project.services.IProjectService;
 import org.modelio.platform.ui.progress.IModelioProgressService;
 import org.modelio.vbasic.auth.IAuthData;
+import org.modelio.vbasic.auth.NoneAuthData;
 import org.modelio.vbasic.auth.UserPasswordAuthData;
 import org.modelio.vbasic.files.FileUtils;
 
@@ -190,6 +191,10 @@ public class OpenProjectHandler {
      */
     @objid ("fb82d6ea-2d28-45f3-95c9-cae6ddf18c8c")
     private IAuthData checkProjectAuth(final Shell shell, final GProjectDescriptor projectToOpen) {
+        if ("LOCAL".equals(projectToOpen.getType())) {
+            return new NoneAuthData();
+        }
+
         String label = AppProjectUiExt.I18N.getMessage("OpenProjectHandler.Auth.ProjectLabel", projectToOpen.getName());
         IAuthData projAuthData = checkPartAuth(shell, projectToOpen.getAuthDescriptor().getData(), projectToOpen.getName()
                 + " project");

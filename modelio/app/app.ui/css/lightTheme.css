@@ -1,7 +1,38 @@
+/*
+ * Modelio "Light" theme.
+ *
+ * v2 — pushed the contrast much harder than the first pass: the initial
+ * #F5F6F8-on-white palette was too close to flat white to actually read as
+ * a redesign at normal viewing distance. This version leans on a visibly
+ * darker gray canvas, a strong white toolbar strip, a real accent-colored
+ * keyline under the tab bar, and rounded/bordered buttons so the change is
+ * obvious, not just technically present.
+ *
+ * Palette:
+ *   canvas (Shell/Composite/panes) : #E4E8EF (clearly gray, not off-white)
+ *   toolbar / coolbar strip         : #FFFFFF (pops off the gray canvas)
+ *   content surfaces (Tree/Table)   : #FFFFFF on a #B7C0D1 border (visible line, not a hint)
+ *   accent (selection/keyline)      : #2F6FED (indigo-blue)
+ *   alternate row                   : #E4EAF7
+ */
 
+Display {
+	font-family: "Segoe UI","Helvetica Neue","Liberation Sans",sans-serif;
+	font-size: 9;
+}
 
-Shell, Composite,Tree,Table,SashForm, Group, ToolBar,CTabItem,CTabFolder, CBanner, CoolBar,CLabel,MPart  {
-    background-color: white;
+Shell, Composite, SashForm, Group, CBanner, CLabel, MPart {
+    background-color: #E4E8EF;
+}
+
+ToolBar, CoolBar {
+	background-color: #FFFFFF;
+	border-color: #C7CDDA;
+}
+
+Tree, Table {
+	background-color: #FFFFFF;
+	border-color: #B7C0D1;
 }
 
 Label ,Text{
@@ -9,17 +40,33 @@ Label ,Text{
 	color : black;
 }
 
-
-
 Button  {
 	background-color: white;
+	border-color: #97A2B8;
+	border-radius: 3;
 }
 
 Button[style~='SWT.CHECK']{
 
 }
 
+CTabFolder {
+	background-color: #E4E8EF;
+	swt-shadow-visible: false;
+	swt-simple: false;
+	swt-mru-visible: false;
+	swt-unselected-close-visible: false;
+	swt-outer-keyline-color: #2F6FED;
+	swt-inner-keyline-color: #FFFFFF;
+	swt-unselected-tabs-color: #E4E8EF;
+	swt-selected-tabs-background: #FFFFFF #D6E4FE 100%;
+	swt-selected-tabs-foreground: #0B3FAE;
+}
+
+CTabItem {
+	background-color: #E4E8EF;
+}
 
 .alternateBackground{
-	background-color:#f2f2ff;
+	background-color:#E4EAF7;
 }
